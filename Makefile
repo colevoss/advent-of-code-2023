@@ -1,2 +1,2 @@
 run:
-	go run $(CURDIR)/day$(day)/*.go
+	go run $(CURDIR)/$(day)/*.go

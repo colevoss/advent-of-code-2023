@@ -15,11 +15,11 @@ func (d *PartTwo) Init() {
 }
 
 func (d *PartTwo) ReadLine(line string, idx int) {
-	num := d.NewParseLine(line)
+	num := d.PraseLine(line)
 	d.Sum += num
 }
 
-func (d *PartTwo) NewParseLine(line string) int {
+func (d *PartTwo) PraseLine(line string) int {
 	first := 0
 	last := 0
 
@@ -39,6 +39,8 @@ func (d *PartTwo) NewParseLine(line string) int {
 		break
 	}
 
+	// Once we have the first digit, we can search for the last
+	// digit by parsing from the tail for cases like 3oneeightwo that should be 32 instead of 38
 	digitWord = ""
 	for _, s := range reverse {
 		digitWord = s + digitWord

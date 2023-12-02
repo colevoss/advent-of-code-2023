@@ -5,7 +5,12 @@ import (
 )
 
 func main() {
-	runner := runner.NewRunner("dayone/input.txt")
+	runner := runner.NewRunner("01/input.txt")
+
+	partone := &PartOne{
+		Sum: 0,
+	}
+	runner.Run(partone)
 
 	parttwo := &PartTwo{
 		Sum: 0,
