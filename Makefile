@@ -1,2 +1,2 @@
 run:
-	go run $(CURDIR)/day$(day)/main.go
+	go run $(CURDIR)/day$(day)/*.go
