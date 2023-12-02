@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	runner := runner.NewRunner("01/input.txt")
+	runner := runner.NewRunner("input/01.txt")
 
 	partone := &PartOne{
 		Sum: 0,
