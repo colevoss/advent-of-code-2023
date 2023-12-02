@@ -34,17 +34,21 @@ func main() {
 	}
 
 	createMainFile(day)
+	createInputFile(day)
 	createPartFile(day, 1, "One")
 	createPartFile(day, 2, "Two")
 }
 
 func createInputFile(day string) {
 	filename := fmt.Sprintf("%s.txt", day)
-	f, err := os.Create(filename)
+	filePath := filepath.Join("input", filename)
+	f, err := os.Create(filePath)
 
 	if err != nil {
 		panic(err)
 	}
+
+	fmt.Printf("%s created", filePath)
 
 	f.Close()
 }

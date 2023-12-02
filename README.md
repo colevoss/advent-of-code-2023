@@ -7,3 +7,11 @@ Done in Go
 ```sh
 make run day=<day>
 ```
+
+## Generate Boilerplate for day
+
+Gerenate directory with go files, input file in `input/`.
+
+```sh
+make gen day=<day>
+```
