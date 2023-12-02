@@ -7,9 +7,9 @@ import (
 func main() {
 	runner := runner.NewRunner("dayone/input.txt")
 
-	partone := &PartOne{
-		Nums: []int{},
+	parttwo := &PartTwo{
+		Sum: 0,
 	}
 
-	runner.Run(partone)
+	runner.Run(parttwo)
 }
