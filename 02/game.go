@@ -61,8 +61,10 @@ func (r *Round) AddCubes(count int, color string) {
 		break
 	case "blue":
 		r.Blue += count
+		break
 	case "green":
 		r.Green += count
+		break
 	}
 }
 
