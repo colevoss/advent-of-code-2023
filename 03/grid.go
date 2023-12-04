@@ -5,11 +5,30 @@ import (
 )
 
 type Part struct {
-	ColStart int
-	ColEnd   int
+	ColStart int // 0     0, 1, 2
+	ColEnd   int // 2
 	Row      int
 	Digits   string
 	Num      int
+}
+
+func (p *Part) OccupiedCols() []int {
+	cols := []int{}
+
+	for i := p.ColStart; i <= p.ColEnd; i++ {
+		cols = append(cols, i)
+	}
+
+	return cols
+}
+
+func (p *Part) IsAdjacentToCol(col int) bool {
+	// is inside
+	if col >= p.ColStart-1 && col <= p.ColEnd+1 {
+		return true
+	}
+
+	return false
 }
 
 func NewPart(row int, colStart int, firstDigit string) *Part {
