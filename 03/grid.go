@@ -69,7 +69,6 @@ func (g *Grid) IsAdjacent(part *Part) bool {
 	partRow := g.Rows[part.Row]
 
 	if leftCol >= 0 && partRow[leftCol] != nil {
-		// fmt.Printf("R: %d, N: %d, Sym: %s\n", part.Row, part.Num, partRow[leftCol].Value)
 		return true
 	}
 

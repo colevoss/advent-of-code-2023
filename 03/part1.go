@@ -16,6 +16,7 @@ func NewPartOne() *PartOne {
 		Grid: &Grid{
 			Rows: []Row{},
 		},
+
 		Parts: []*Part{},
 	}
 }
@@ -25,7 +26,6 @@ func (p *PartOne) Init() {
 }
 
 func (p *PartOne) ReadLine(line string, idx int) {
-	// fmt.Println("Reading line", line, idx)
 	p.ParseLine(line, idx)
 }
 
