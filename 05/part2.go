@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"sync"
 	"time"
 )
 
@@ -27,41 +28,61 @@ func (p *PartTwo) Init() {
 	fmt.Println("Initializing Day 05 Part 2")
 }
 
-// func (p *PartTwo) ReadLine(line string, idx int) {
-// }
-
 func (p *PartTwo) Finish() {
 	start := time.Now()
 
-	fmt.Printf("Day 05 Part 2:\n")
 	p.FixSeedPairs()
 
 	min := math.MaxInt
-	// min := -1
+
+	var wg sync.WaitGroup
+	c := make(chan int)
 
 	for _, sp := range p.SeedPairs {
-		fmt.Printf("Starting seed pair: %+v\n", sp)
-		for s := sp.Start; s < sp.Start+sp.Range; s++ {
-			seed := s
+		wg.Add(1)
+		go func(sp SeedRange) {
+			defer wg.Done()
+			spMin := math.MaxInt
 
-			for _, m := range p.Maps {
-				seed = m.MapSeed(seed)
+			spStart := time.Now()
+			fmt.Printf("Starting seed pair: %+v\n", sp)
+			top := sp.Start + sp.Range
+
+			for s := sp.Start; s < top; s++ {
+				seed := s
+
+				for _, m := range p.Maps {
+					seed = m.MapSeed(seed)
+				}
+
+				if seed < spMin {
+					spMin = seed
+				}
 			}
 
-			// if seed < min || min == -1 {
-			if seed < min {
-				min = seed
-			}
+			c <- spMin
+
+			spEnd := time.Now()
+			dur := spEnd.Sub(spStart)
+			fmt.Printf("Seed Pair Finished: %+v\n", dur)
+		}(sp)
+	}
+
+	go func() {
+		wg.Wait()
+		close(c)
+	}()
+
+	for minNum := range c {
+		if minNum < min {
+			min = minNum
 		}
-
-		spEnd := time.Now()
-		dur := spEnd.Sub(start)
-		fmt.Printf("Seed Pair Finished: %+v\n", dur)
 	}
 
 	end := time.Now()
 	dur := end.Sub(start)
 
+	fmt.Printf("Day 05 Part 2:\n")
 	fmt.Printf("%d\n", min)
 	fmt.Printf("Duration %+v\n", dur)
 }
