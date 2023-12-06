@@ -107,9 +107,9 @@ func main() {
 	partone := NewPartOne()
 	runner.Run(partone)
 
-	parttwo := NewPartTwo()
-
-	runner.Run(parttwo)
+  // Uncomment to work on part two
+	// parttwo := NewPartTwo()
+	// runner.Run(parttwo)
 }
 `
 var partFileTempl = `
