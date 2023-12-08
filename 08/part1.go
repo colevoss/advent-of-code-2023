@@ -30,11 +30,16 @@ func (p *PartOne) ReadLine(line string, idx int) {
 		return
 	}
 
-	key, nodes := p.ParseMapLine(line)
+	key, nodes := ParseMapLine(line)
+
+	// if strings.HasSuffix(key, "A") {
+	// 	fmt.Printf("key: %v\n", key)
+	// }
+
 	p.Map[key] = nodes
 }
 
-func (p *PartOne) ParseMapLine(line string) (key string, nodes []string) {
+func ParseMapLine(line string) (key string, nodes []string) {
 	parts := strings.Split(line, " = ")
 
 	key = parts[0]
@@ -49,8 +54,8 @@ func (p *PartOne) ParseMapLine(line string) (key string, nodes []string) {
 func (p *PartOne) Finish() {
 	fmt.Printf("Day 08 Part 1:\n")
 	// fmt.Printf("p.Map: %+v\n", p.Map)
-	count := p.WalkTree()
-	fmt.Printf("%d\n", count)
+	// count := p.WalkTree()
+	// fmt.Printf("%d\n", count)
 }
 
 func (p *PartOne) WalkTree() int {
