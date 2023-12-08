@@ -23,7 +23,9 @@ func (h HandCards) HighCard() Card {
 }
 
 const (
-	TwoCard Card = iota
+	// TwoCard Card = iota
+	JokerCard Card = iota
+	TwoCard
 	ThreeCard
 	FourCard
 	FiveCard
@@ -32,7 +34,7 @@ const (
 	EightCard
 	NineCard
 	TenCard
-	JackCard
+	// JackCard
 	QueenCard
 	KingCard
 	AceCard
@@ -58,8 +60,10 @@ func parseCard(cardStr string) Card {
 		return NineCard
 	case "T":
 		return TenCard
+	// case "J":
+	// 	return JackCard
 	case "J":
-		return JackCard
+		return JokerCard
 	case "Q":
 		return QueenCard
 	case "K":

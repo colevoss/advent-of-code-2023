@@ -25,6 +25,7 @@ func (p *PartOne) ReadLine(line string, idx int) {
 	bidStr := parts[1]
 
 	hand := NewHand(handStr, bidStr)
+	// fmt.Printf("hand: %+v\n", hand)
 
 	p.Hands = append(p.Hands, hand)
 }
@@ -35,7 +36,6 @@ func (p *PartOne) Finish() {
 
 	score := 0
 	for i, hand := range p.Hands {
-		// hand := p.Hands[i-1]
 		rank := len(p.Hands) - i
 		handScore := rank * hand.Bid
 		score += handScore

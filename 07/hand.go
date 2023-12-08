@@ -5,22 +5,11 @@ import (
 	"strings"
 )
 
-type HandType int
-
-const (
-	HighCard  HandType = iota // 0
-	OnePair                   // 1
-	TwoPair                   // 2
-	ThreeKind                 // 3
-	FullHouse                 // 4
-	FourKind                  // 5
-	FiveKind                  // 6
-)
-
 type Hand struct {
-	Cards []Card
-	Type  HandType
-	Bid   int
+	Cards      []Card
+	Type       HandType
+	Bid        int
+	JokerCount int
 }
 
 type SortByHand []*Hand
@@ -56,7 +45,7 @@ func (h SortByHand) Less(i, j int) bool {
 }
 
 func NewHand(cardStr string, bidStr string) *Hand {
-	cards := parseCards(cardStr)
+	cards, jokerCount := parseCards(cardStr)
 	bid, err := parseBid(bidStr)
 
 	if err != nil {
@@ -64,12 +53,13 @@ func NewHand(cardStr string, bidStr string) *Hand {
 	}
 
 	hand := &Hand{
-		Cards: cards,
-		Bid:   bid,
+		Cards:      cards,
+		Bid:        bid,
+		JokerCount: jokerCount,
 	}
 
-	handType := hand.FigureHand()
-	hand.Type = handType
+	hand.Type = hand.FigureHand()
+	hand.Type = hand.Type.Upgrade(hand.JokerCount)
 
 	return hand
 }
@@ -116,16 +106,23 @@ func (h *Hand) FigureHand() HandType {
 	return HighCard
 }
 
-func parseCards(cardsStr string) HandCards {
+func parseCards(cardsStr string) (cards HandCards, jokerCount int) {
 	split := strings.Split(strings.TrimSpace(cardsStr), "")
 
-	cards := make([]Card, len(split))
+	jokerCount = 0
+	cards = make([]Card, len(split))
 
 	for i, c := range split {
-		cards[i] = parseCard(c)
+		card := parseCard(c)
+
+		if card == JokerCard {
+			jokerCount++
+		}
+
+		cards[i] = card
 	}
 
-	return cards
+	return
 }
 
 func parseBid(bidStr string) (int, error) {
