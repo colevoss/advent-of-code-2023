@@ -1,13 +1,9 @@
 package main
 
-// import "fmt"
-
 type Sequence []int
 
 func (s Sequence) FindNext() int {
 	reduced := s.Reduce()
-
-	// fmt.Printf("reduced: %v\n", reduced)
 
 	toAdd := 0
 	for i := len(reduced) - 1; i >= 0; i-- {
@@ -16,9 +12,7 @@ func (s Sequence) FindNext() int {
 		toAdd += last
 	}
 
-	// fmt.Printf("toAdd: %v\n", toAdd)
 	next := toAdd + s[len(s)-1]
-	// fmt.Printf("NEXT: %v\n", next)
 	return next
 }
 
