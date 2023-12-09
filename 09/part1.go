@@ -22,7 +22,6 @@ func (p *PartOne) Init() {
 
 func (p *PartOne) ReadLine(line string, idx int) {
 	ints := parseLine(line)
-	fmt.Printf("ints: %v\n", ints)
 	next := ints.FindNext()
 
 	p.Sum += next

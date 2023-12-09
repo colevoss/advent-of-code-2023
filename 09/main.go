@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -8,10 +7,10 @@ import (
 func main() {
 	runner := runner.NewRunner("input/09.txt")
 
-	partone := NewPartOne()
-	runner.Run(partone)
+	// partone := NewPartOne()
+	// runner.Run(partone)
 
-  // Uncomment to work on part two
-	// parttwo := NewPartTwo()
-	// runner.Run(parttwo)
+	// Uncomment to work on part two
+	parttwo := NewPartTwo()
+	runner.Run(parttwo)
 }

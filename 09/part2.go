@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -6,11 +5,13 @@ import (
 )
 
 type PartTwo struct {
+	Sum int
 }
 
 func NewPartTwo() *PartTwo {
-  return &PartTwo {
-  }
+	return &PartTwo{
+		Sum: 0,
+	}
 }
 
 func (p *PartTwo) Init() {
@@ -18,10 +19,13 @@ func (p *PartTwo) Init() {
 }
 
 func (p *PartTwo) ReadLine(line string, idx int) {
-  fmt.Println("Reading line", line, idx)
+	ints := parseLine(line)
+	prev := ints.FindPrevious()
+
+	p.Sum += prev
 }
 
 func (p *PartTwo) Finish() {
 	fmt.Printf("Day 09 Part 2:\n")
-	// fmt.Printf("%d:\n", p.Sum)
+	fmt.Printf("%d\n", p.Sum)
 }

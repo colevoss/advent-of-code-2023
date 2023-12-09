@@ -16,6 +16,20 @@ func (s Sequence) FindNext() int {
 	return next
 }
 
+func (s Sequence) FindPrevious() int {
+	reduced := s.Reduce()
+
+	toAdd := 0
+	for i := len(reduced) - 1; i >= 0; i-- {
+		seq := reduced[i]
+		first := seq[0]
+		toAdd = first - toAdd
+	}
+
+	prev := s[0] - toAdd
+	return prev
+}
+
 func (s Sequence) Reduce() [][]int {
 	seqs := [][]int{}
 
